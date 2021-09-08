@@ -1,21 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { Block } from "expo-ui-kit";
+import React from "react";
+import { Provider } from "react-redux";
+import GenerateNumberContainer from "./components/GenerateNumberContainer";
+import { store } from "./redux/store";
+import { DefaultTheme, Provider as ProviderPaper } from "react-native-paper";
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: "tomato",
+    accent: "yellow",
+  },
+};
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <ProviderPaper theme={theme}>
+        <Block flex>
+          <GenerateNumberContainer />
+        </Block>
+      </ProviderPaper>
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
